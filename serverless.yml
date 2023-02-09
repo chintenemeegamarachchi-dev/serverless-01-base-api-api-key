@@ -21,8 +21,25 @@ provider:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
   apiGateway:
     apiKeys:
-      - myTestKey
-
+      - nanoPlan:
+        - nanoPlanKey
+      - basicPlan:
+        - basicPlanKey
+    usagePlan:
+      - nanoPlan:
+          quota:
+            limit: 2
+            period: MONTH
+          throttle:
+            rateLimit: 5
+            burstLimit: 5 
+      - basicPlan:
+          quota:
+            limit: 1000
+            period: MONTH
+          throttle:
+            rateLimit: 5
+            burstLimit: 20            
 functions:
   createNote:
     handler: handler.createNote
